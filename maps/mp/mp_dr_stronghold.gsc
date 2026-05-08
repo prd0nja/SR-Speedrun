@@ -62,8 +62,8 @@ main()
 
 	//-----------Variables-----------//
 
-	level.hudYOffset = 10;
-	level.time = 18;
+	// level.hudYOffset = 10;
+	// level.time = 18;
 
 	//-----------MapParts-----------//
 
