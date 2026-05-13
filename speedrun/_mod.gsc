@@ -84,12 +84,12 @@ main()
 	speedrun\core\_match::main();
 	speedrun\core\_pbs::main();
 	speedrun\core\_run::main();
+	speedrun\core\_settings::main();
 	speedrun\huds\_demo::main();
 	speedrun\huds\_speedrun::main();
 	speedrun\menus\_leaderboards::main();
 	speedrun\menus\_main::main();
 	speedrun\sys\_scoreboard::main();
-	speedrun\sys\_settings::main();
 
 	braxi\_mod::main();
 }
