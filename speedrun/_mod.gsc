@@ -16,6 +16,8 @@ main()
 	maps\mp\gametypes\_quickmessages::init();
 	maps\mp\gametypes\_weapons::init();
 
+	braxi\_mod::main();
+
 	sr\_mod::main();
 	sr\commands\_admin::main();
 	sr\commands\_bomberman::main();
@@ -90,8 +92,6 @@ main()
 	speedrun\menus\_leaderboards::main();
 	speedrun\menus\_main::main();
 	speedrun\sys\_scoreboard::main();
-
-	braxi\_mod::main();
 }
 
 precache()
