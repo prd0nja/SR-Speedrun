@@ -7,5 +7,8 @@
         "*.inc": "gsc",
 		"*.cfg": "gsc",
 		"env": "ini"
-    }
+	},
+	"gsc.includedWorkspaceFolders": [
+		"raw"
+	]
 }

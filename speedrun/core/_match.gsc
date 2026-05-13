@@ -35,7 +35,7 @@ start()
 
 	matchStartPlayers();
 	timer();
-	thread speedrun\game\_map::end();
+	thread speedrun\core\_map::end();
 }
 
 canStartGame()
@@ -123,7 +123,7 @@ timer()
 		level.time--;
 
 		if (level.time == 180)
-			level sr\sys\_notifications::show("^1Map will end in 3 minutes!");
+			level sr\huds\_notifications::show("^1Map will end in 3 minutes!");
 		else if (level.time <= 60 && level.time > 10 && level.time % 2 == 0)
 		{
 			clock playSound("ui_mp_timer_countdown");

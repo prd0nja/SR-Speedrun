@@ -21,7 +21,7 @@ cmd_Speed(args)
 	self setStat(1700, Ternary(speed == "190", 1, 2));
     self.sr_mode = speed;
     self pm(fmt("Run mode: ^5%s", speed));
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
@@ -30,7 +30,7 @@ cmd_190(args)
 	self setStat(1700, 1);
 	self.sr_mode = "190";
     self pm("Run mode: ^5190");
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
@@ -39,31 +39,31 @@ cmd_210(args)
 	self setStat(1700, 2);
 	self.sr_mode = "210";
     self pm("Run mode: ^5210");
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
 cmd_Portal(args)
 {
-	if (self sr\player\modes\_main::isInMode("portal"))
+	if (self sr\core\_modes::isInMode("portal"))
 		return;
 
 	self setStat(1700, 3);
 	self.sr_mode = "Portal";
     self pm("Run mode: ^5Portal");
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
 cmd_Defrag(args)
 {
-	if (self sr\player\modes\_main::isInMode("defrag"))
+	if (self sr\core\_modes::isInMode("defrag"))
 		return;
 
 	self setStat(1700, 4);
 	self.sr_mode = "Defrag";
     self pm("Run mode: ^5Defrag");
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
@@ -72,16 +72,16 @@ cmd_Bhop(args)
 	self setStat(1700, 5);
 	self.sr_mode = "Bhop";
     self pm("Run mode: ^5Bhop");
-	self thread speedrun\game\_leaderboards::updateMenuInfo();
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
 cmd_Practise(args)
 {
-    if (self sr\player\modes\_main::isInOtherMode("practise"))
+    if (self sr\core\_modes::isInOtherMode("practise"))
 		return;
 
-	self sr\player\modes\_main::toggleMode("practise");
+	self sr\core\_modes::toggleMode("practise");
 	self suicide();
 
     if (self.modes["practise"])
@@ -100,7 +100,7 @@ cmd_Teleport(args)
 {
 	if (args.size < 1)
 		return self pm("Usage: teleport <playerName>");
-	if (!self sr\player\modes\_main::isInMode("practise"))
+	if (!self sr\core\_modes::isInMode("practise"))
 		return self pm("^1Player need to be in practise mode");
 
 	player = getPlayerByName(args[0]);
@@ -125,7 +125,7 @@ cmd_Sheep(args)
 
 cmd_FX(args)
 {
-	self sr\player\_settings::toggle("gfx_fx");
+	self sr\core\_settings::toggle("gfx_fx");
 
 	msg = Ternary(self.settings["gfx_fx"], "^2FX On", "^1FX Off");
 	self pm(msg);

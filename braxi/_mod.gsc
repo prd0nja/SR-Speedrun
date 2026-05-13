@@ -4,7 +4,7 @@
 
 main()
 {
-	braxi\_dvar::initDvars();
+	braxi\_dvar::main();
 
 	level.freeRun = true;
 	level.trapsDisabled = true;
@@ -15,7 +15,7 @@ main()
 
 endTimer()
 {
-	self thread speedrun\player\run\_main::endTimer();
+	self thread speedrun\core\_run::endTimer();
 }
 
 addTextHud(who, x, y, alpha, alignX, alignY, fontScale)

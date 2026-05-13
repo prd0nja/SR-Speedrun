@@ -18,8 +18,8 @@ setup(id)
 	}
 	self.demo = level.demos[id];
 	self.sr_mode = self.demo["mode"];
-	self sr\game\_teams::setTeam("allies");
-	self setStat(1700, self speedrun\player\run\_main::getLastModeStat());
+	self sr\core\_teams::setTeam("allies");
+	self setStat(1700, self speedrun\core\_run::getLastModeStat());
 	self eventSpawn(true);
 
 	if (isDefined(self.demoCamera))
@@ -44,7 +44,7 @@ setup(id)
 
 play(id)
 {
-	if (sr\game\_event::isEventStarted())
+	if (sr\core\_event::isEventStarted())
 		return;
 
 	if (!self setup(id))
@@ -56,7 +56,7 @@ play(id)
 	self endon("death");
 	self endon("disconnect");
 
-	self thread speedrun\player\huds\_demo::hud();
+	self thread speedrun\huds\_demo::hud();
 	self.prevDemoWeapon = "";
 
 	while (self isPlaying() && self isDemoPlaying())
@@ -119,7 +119,7 @@ endmapSpectateDemo()
 	players = getAllPlayers();
 	for (i = 0; i < players.size; i++)
 	{
-		players[i] sr\game\_teams::setTeam("spectator");
+		players[i] sr\core\_teams::setTeam("spectator");
 		players[i] eventSpectator(true);
 		players[i] spawnSpectator();
 	}

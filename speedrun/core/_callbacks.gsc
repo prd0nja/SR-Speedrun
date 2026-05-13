@@ -14,7 +14,7 @@ playerConnect()
 	self.teamKill = false;
 	self.hidden = false;
 
-	self.sr_mode = self speedrun\player\run\_main::getLastMode();
+	self.sr_mode = self speedrun\core\_run::getLastMode();
 	self.sr_way = "normal_0";
 	self.run = 0;
 
@@ -28,7 +28,7 @@ playerConnect()
 		self.assists = self.pers["assists"];
 		self.deaths = self.pers["deaths"];
 
-		self sr\game\_teams::setTeam("allies");
+		self sr\core\_teams::setTeam("allies");
 		return;
 	}
 	self.pers["score"] = 0;
@@ -104,8 +104,8 @@ playerSpawn()
 	level notify("jumper", self);
 	self cleanUp();
 
-	self sr\game\_teams::setPlayerModel();
-	self sr\game\_teams::setHealth();
+	self sr\core\_teams::setPlayerModel();
+	self sr\core\_teams::setHealth();
 
 	self.pers["weapon"] = self getCustomizeWeapon()["item"];
 	self.pers["knife"] = self getCustomizeKnife()["item"];
@@ -141,7 +141,7 @@ playerSpawn()
 	if (self getStat(988))
 		self setClientDvar("cg_thirdperson", 1);
 
-	self speedrun\player\run\_main::start();
+	self speedrun\core\_run::start();
 
 	self notify("spawned_player");
 	level notify("player_spawn", self);

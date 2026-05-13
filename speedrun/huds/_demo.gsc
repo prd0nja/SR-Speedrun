@@ -42,7 +42,7 @@ huds()
 {
 	time = self.demo["time"];
 	timeFormat = fmt("%d:%d.%d", time.min, time.sec, time.ms);
-	wayName = speedrun\game\_leaderboards::getLeaderboardName(self.demo["mode"], self.demo["way"]);
+	wayName = speedrun\core\_leaderboards::getLeaderboardName(self.demo["mode"], self.demo["way"]);
 
 	self.huds["demo"] = [];
 	self.huds["demo"]["fastforward"] = addHud(self, 3, -50, 1, "left", "bottom", 1.4);

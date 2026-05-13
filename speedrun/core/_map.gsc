@@ -9,10 +9,10 @@ main()
 	level.tempEntity = spawn("script_model", (0, 0, 0));
 	level.files["rotation"] = PATH_Mod("data/match/rotation.txt");
 	level.files["maps"] = PATH_Mod("data/match/maps.txt");
-	level.rotation = sr\game\_map::getRotation(false);
+	level.rotation = sr\core\_map::getRotation(false);
 	level.randomizedMaps = [];
 
-	thread sr\game\_map::randomizeMaps(5);
+	thread sr\core\_map::randomizeMaps(5);
 
 	event("map", ::placeSpawns);
 	event("map", ::deleteUnsupportedWeapons);
@@ -97,7 +97,7 @@ end(map)
 endMusic()
 {
 	alias = fmt("end_map%d", randomIntRange(1, 9));
-	thread sr\game\music\_main::play(alias);
+	thread sr\core\_music::playAmbient(alias);
 }
 
 endSpectate()
@@ -118,7 +118,7 @@ endSpectate()
 	players = getAllPlayers();
 	for (i = 0; i < players.size; i++)
 	{
-		players[i] sr\game\_teams::setSpectator();
+		players[i] sr\core\_teams::setSpectator();
 		players[i] allowSpectateTeam("allies", true);
 		players[i] allowSpectateTeam("axis", true);
 		players[i] allowSpectateTeam("freelook", false);
@@ -141,10 +141,10 @@ voteNextMap()
 
 	if (level.dvar["map_vote"])
 	{
-		result = sr\game\_poll::poll("Next map", maps);
+		result = sr\core\_poll::poll("Next map", maps);
 		if (isDefined(result))
 		{
-			level sr\sys\_notifications::show(fmt("^5Next map: ^7%s", result.label));
+			level sr\huds\_notifications::show(fmt("^5Next map: ^7%s", result.label));
 			return result.label;
 		}
 		return autoPick;
@@ -155,7 +155,7 @@ voteNextMap()
 
 credits()
 {
-	sr\game\_credits::start();
+	sr\huds\_credits::start();
 }
 
 intermission()

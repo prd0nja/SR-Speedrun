@@ -97,12 +97,12 @@ menu_Team(arg)
 	if (game["state"] == "end")
 		return;
 
-	if (self isAxis() || self sr\game\minigames\_main::isInAnyQueue())
+	if (self isAxis() || self sr\core\_minigames::isInAnyQueue())
 	{
 		self iPrintLn("^1Switching team disabled");
 		return;
 	}
-	self sr\game\_teams::setTeam("allies");
+	self sr\core\_teams::setTeam("allies");
 
 	if (self canSpawn())
 		self eventSpawn();
@@ -121,5 +121,5 @@ menu_Spectator(arg)
 		self iPrintln("^1Nice try.");
 		return;
 	}
-	self sr\game\_teams::setSpectator();
+	self sr\core\_teams::setSpectator();
 }

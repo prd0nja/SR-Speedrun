@@ -68,8 +68,8 @@ updateRecords()
 	if (!isHud("row2"))
 		return;
 
-	wr = speedrun\game\_leaderboards::getWorldRecord(self.sr_mode, self.sr_way);
-	pb = self speedrun\game\_pbs::getPersonalBest(self.sr_mode, self.sr_way);
+	wr = speedrun\core\_leaderboards::getWorldRecord(self.sr_mode, self.sr_way);
+	pb = self speedrun\core\_pbs::getPersonalBest(self.sr_mode, self.sr_way);
 
 	self.huds["speedrun"]["row2"] setText("^3" + pb);
 	self.huds["speedrun"]["row2"].label = &"(PB)                  ";
@@ -126,7 +126,7 @@ updateWay()
 
 	self updateRecords();
 
-	name = speedrun\game\_leaderboards::getLeaderboardName(self.sr_mode, self.sr_way);
+	name = speedrun\core\_leaderboards::getLeaderboardName(self.sr_mode, self.sr_way);
 	self.huds["speedrun"]["name"] setText(name);
 }
 

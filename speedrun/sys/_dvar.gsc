@@ -1,6 +1,6 @@
 #include sr\sys\_dvar;
 
-initDvars()
+main()
 {
 	addDvar("mod", "mod_id", "speedrun");
 	addDvar("debug", "sr_debug", 0, 0, 1, "int");
@@ -11,6 +11,7 @@ initDvars()
 	addDvar("map_vote", "sr_map_vote", 1, 0, 1, "int");
 	addDvar("map_edition", "sr_map_edition", 1, 0, 1, "int");
 	addDvar("match_need_players", "sr_match_need_players", 0, 0, 10, "int");
+	addDvar("time", "sr_time", 1800, 60, 7200, "int");
 
 	setDvar("g_deadchat", 1000);
 	setDvar("g_knockback", 1000);
