@@ -4,8 +4,8 @@
 
 main()
 {
-    cmd("owner", 	"leaderboard_delete",			::cmd_LeaderboardDelete);
-    cmd("owner", 	"leaderboard_delete_entry",		::cmd_LeaderboardDeleteEntry);
+	cmd("leaderboard_delete_entry", "owner", ::cmd_LeaderboardDeleteEntry, 	"Delete an entry in a leaderboard");
+	cmd("leaderboard_delete", 		"owner", ::cmd_LeaderboardDelete, 		"Delete a whole leaderboard");
 }
 
 cmd_LeaderboardDelete(args)

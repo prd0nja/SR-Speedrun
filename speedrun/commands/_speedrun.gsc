@@ -3,26 +3,15 @@
 
 main()
 {
-    cmd("player", 	"bhop",   	::cmd_Bhop);
-    cmd("player", 	"defrag",   ::cmd_Defrag);
-    cmd("player", 	"speed",    ::cmd_Speed);
-    cmd("player", 	"190",    	::cmd_190);
-    cmd("player", 	"210",    	::cmd_210);
-    cmd("player", 	"portal",   ::cmd_Portal);
-	cmd("player", 	"practise",	::cmd_Practise);
-	cmd("player", 	"sheep",	::cmd_Sheep);
-	cmd("player", 	"fxenable",	::cmd_FX);
-	cmd("player", 	"teleport",	::cmd_Teleport);
-}
-
-cmd_Speed(args)
-{
-    speed = Ternary(self.sr_mode == "190", "210", "190");
-	self setStat(1700, Ternary(speed == "190", 1, 2));
-    self.sr_mode = speed;
-    self pm(fmt("Run mode: ^5%s", speed));
-	self thread speedrun\core\_leaderboards::updateMenuInfo();
-    self suicide();
+	cmd("fxenable", "player", ::cmd_FX,       "Toggle game FX");
+	cmd("practise", "player", ::cmd_Practise, "Toggle practise mode");
+	cmd("sheep",    "player", ::cmd_Sheep,    "Toggle sheep mode");
+	cmd("teleport", "player", ::cmd_Teleport, "Teleport to a player in practise mode");
+    cmd("190",      "player", ::cmd_190,      "Game mode with original movements at 190 g_speed with 1.05 scale");
+    cmd("210",      "player", ::cmd_210,      "Game mode with original movements at 210 g_speed with 1.12 scale");
+    cmd("bhop",     "player", ::cmd_Bhop,     "Game mode with bunny hop at 320 g_speed and 0.9 scale");
+    cmd("defrag",   "player", ::cmd_Defrag,   "Game mode with bunny hop and defrag weapons at 320 g_speed and 0.9 scale");
+    cmd("portal",   "player", ::cmd_Portal,   "Game mode with a portal gun at 210 g_speed with 1.12 scale");
 }
 
 cmd_190(args)
