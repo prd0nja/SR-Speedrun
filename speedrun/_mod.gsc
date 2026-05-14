@@ -1,7 +1,5 @@
 main()
 {
-	precache();
-
 	speedrun\sys\_dvar::main();
 
 	maps\mp\gametypes\_hud::init();
@@ -92,30 +90,4 @@ main()
 	speedrun\menus\_leaderboards::main();
 	speedrun\menus\_main::main();
 	speedrun\sys\_scoreboard::main();
-}
-
-precache()
-{
-	precacheItem("knife_mp");
-	precacheItem("dog_mp");
-	precacheItem("saw_mp");
-	precacheItem("tomahawk_mp");
-	precacheItem("fortnite_mp");
-	precacheItem("artillery_mp");
-	precacheItem("airstrike_mp");
-	precacheItem("cobra_FFAR_mp");
-	precacheItem("hind_FFAR_mp");
-	precacheItem("cobra_20mm_mp");
-
-	precacheShader("time_hud");
-	precacheShader("sr_shop");
-	precacheShader("sr_dice");
-	precacheShader("sr_vip");
-	precacheShader("sr_insert");
-	precacheShader("speedrunner_logo");
-
-	precacheModel("german_sheperd_dog");
-	precacheModel("collision_sphere");
-	precacheModel("mil_frame_charge");
-	precacheModel("ch_crate64x64");
 }
