@@ -9,9 +9,11 @@ main()
 	cmd("teleport", "player", ::cmd_Teleport, "Teleport to a player in practise mode");
     cmd("190",      "player", ::cmd_190,      "Game mode with original movements at 190 g_speed with 1.05 scale");
     cmd("210",      "player", ::cmd_210,      "Game mode with original movements at 210 g_speed with 1.12 scale");
-    cmd("bhop",     "player", ::cmd_Bhop,     "Game mode with bunny hop at 320 g_speed and 0.9 scale");
-    cmd("defrag",   "player", ::cmd_Defrag,   "Game mode with bunny hop and defrag weapons at 320 g_speed and 0.9 scale");
-    cmd("portal",   "player", ::cmd_Portal,   "Game mode with a portal gun at 210 g_speed with 1.12 scale");
+    cmd("q3",       "player", ::cmd_Q3,       "Game mode with Q3 (VQ3) movements");
+    cmd("q3cpm",    "player", ::cmd_Q3CPM,    "Game mode with Q3 (CPM) movements");
+    cmd("q3cpmw",   "player", ::cmd_Q3CPMW,   "Game mode with Q3 (CPM) movements and weapons");
+    cmd("cs",       "player", ::cmd_CS,       "Game mode with CS movements");
+    cmd("portal",   "player", ::cmd_Portal,   "Game mode with CS movements and a portal gun");
     cmd("speed",    "player", ::cmd_Speed,    "Toggle between 190 and 210 game mode");
 }
 
@@ -43,35 +45,47 @@ cmd_210(args)
     self suicide();
 }
 
-cmd_Portal(args)
+cmd_Q3(args)
 {
-	if (self sr\core\_modes::isInMode("portal"))
-		return;
-
 	self setStat(1700, 3);
-	self.sr_mode = "Portal";
-    self pm("Run mode: ^5Portal");
+	self.sr_mode = "Q3";
+    self pm("Run mode: ^5Q3");
 	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
-cmd_Defrag(args)
+cmd_Q3CPM(args)
 {
-	if (self sr\core\_modes::isInMode("defrag"))
-		return;
-
 	self setStat(1700, 4);
-	self.sr_mode = "Defrag";
-    self pm("Run mode: ^5Defrag");
+	self.sr_mode = "Q3CPM";
+    self pm("Run mode: ^5Q3CPM");
 	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
 
-cmd_Bhop(args)
+cmd_Q3CPMW(args)
 {
 	self setStat(1700, 5);
-	self.sr_mode = "Bhop";
-    self pm("Run mode: ^5Bhop");
+	self.sr_mode = "Q3CPMW";
+    self pm("Run mode: ^5Q3CPMW");
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
+    self suicide();
+}
+
+cmd_CS(args)
+{
+	self setStat(1700, 6);
+	self.sr_mode = "CS";
+    self pm("Run mode: ^5CS");
+	self thread speedrun\core\_leaderboards::updateMenuInfo();
+    self suicide();
+}
+
+cmd_Portal(args)
+{
+	self setStat(1700, 7);
+	self.sr_mode = "Portal";
+    self pm("Run mode: ^5Portal");
 	self thread speedrun\core\_leaderboards::updateMenuInfo();
     self suicide();
 }
