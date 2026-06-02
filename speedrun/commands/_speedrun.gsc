@@ -3,7 +3,7 @@
 
 main()
 {
-	cmd("fxenable", "player", ::cmd_FX,       "Toggle game FX");
+	cmd("fx",       "player", ::cmd_FX,       "Toggle game FX");
 	cmd("practise", "player", ::cmd_Practise, "Toggle practise mode");
 	cmd("sheep",    "player", ::cmd_Sheep,    "Toggle sheep mode");
 	cmd("teleport", "player", ::cmd_Teleport, "Teleport to a player in practise mode");
