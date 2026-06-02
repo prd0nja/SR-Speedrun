@@ -4,7 +4,7 @@
 
 The official CoD4 multiplayer speedrun mod powered by [SR-Core](https://github.com/Iswenzz/SR-Core).
 
-A complete competitive speedrunning server experience built for the CoD4 community, featuring global leaderboards, integrated anti-cheat systems, and deep character customization — with over 12,000 unique players and more than 100,000 unique records set across all maps.
+A complete competitive speedrunning server experience built for the CoD4 community, featuring global leaderboards, integrated anti-cheat systems, and deep character customization — with over 12,000 unique players and more than 150,000 unique records set across all maps.
 
 Race through maps as fast as possible and compete for the top spot on the global leaderboard. Every completed run earns you XP — the higher your placement and the more competitive the record pool, the more XP you'll earn.
 
