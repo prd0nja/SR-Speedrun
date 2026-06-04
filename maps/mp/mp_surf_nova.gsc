@@ -1,11 +1,12 @@
 #include common_scripts\utility;
 
 main() {
+	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
 	maps\mp\_load::main();
 
 	thread goToSpawn();
 
-	thread devSavePos();
+	// thread devSavePos();
 }
 
 goToSpawn () {
@@ -55,6 +56,7 @@ goToSpawnCleanup (org) {
 	org delete();
 }
 
+/*
 devSavePos () {
 	for (;;) {
 		players = getEntArray("player", "classname");
@@ -108,3 +110,4 @@ loadPlayerData () {
 
 	wait 1;
 }
+*/

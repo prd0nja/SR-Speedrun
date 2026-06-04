@@ -24,6 +24,7 @@
 
 main()
 {
+	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
 	// FX ++
 	level.spawn_geotrail_fx						= loadFx( "trails/fx_trail_pink" );
 	level.trail_gloaming_mm						= loadFx( "trails/fx_trail_pink" );
@@ -196,7 +197,7 @@ watchSpawn()
 				player.tag   linkto( player );
 			}
 
-			// player thread helpingHand();
+			player thread helpingHand();
 
 			if( isdefined( player.tag ) )
 			{

@@ -24,6 +24,7 @@
 
 main()
 {
+	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
 	// FX ++
 	level.trail_gloaming_mm						= loadFx( "trails/fx_trail_pink" );
 
@@ -70,8 +71,7 @@ watchSpawn()
 				player.tag   linkto( player );
 			}
 
-			// The second people figure out this is a thing it's gonna get abused - atrX
-			// player thread helpingHand();
+			player thread helpingHand();
 
 			if( isdefined( player.tag ) )
 			{

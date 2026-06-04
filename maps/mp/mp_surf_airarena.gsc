@@ -40,226 +40,95 @@
 						-++++++++++++++++++++++++++++++++++++++++++++-
 
 							MAPPER:			R4d0xZz
-							MAPNAME:		surf_rebel_resistance_reloaded
-							CONSOLE-NAME:	mp_surf_rebel
+							MAPNAME:		surf_airarena
+							CONSOLE-NAME:	mp_surf_airarena
 							GAMETYPES:		surf
+							DIFFICULTY:		intermediate
 
 						-++++++++++++++++++++++++++++++++++++++++++++-
 
 */
 
-#include maps\mp\_utility;
-#include maps\mp\gametypes\_hud_util;
-#include common_scripts\utility;
-
 main()
 {
-	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+
+getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+
+	level.sqaures  = loadFx( "surf/moving_sqaures" );
+	level.rainbow  = loadFx( "surf/rainbow_rotate" );
+	level.screw    = loadFx( "surf/moving_screw" );
+	level.clap01  = loadFx( "surf/theclappening_01" );
+	level.clap02  = loadFx( "surf/theclappening_02" );
+
+
 	// THREADS+ //
 
-	  thread box1_open();
-	  thread box2_open();
-	  thread box3_open();
-	  thread box4_open();
+	thread playFX_Spawn();
+	thread playFX2_Spawn();
+	thread playFX3_Finish();
+	thread playFX4_Finish();
+	thread playFX5_Finish();
 
+	thread applause();
 
 	// PRECACHE+ //
 
-	  PreCacheItem( "pickaxe_mp" );
-	  PreCacheItem( "sword_mp" );
-	  PreCacheItem( "sword_diamond_mp" );
-	  PreCacheItem( "cinematic_mp" );
-
-
 	// MISC+ //
 
-	  setExpFog(6000, 7500, 0.9, 0.7, 0.7, 1);		// org : setExpFog(400, 401, 0.7, 0.7, 0.7, 1);
 
-	  level.fognearplane = 6000;
-	  level.fogexphalfplane = 7500;
+	// SURF+ //
+
+	//level.surfDifficulty = "easy";
+	//level.surfNoTimer = true;
+
 
 
 }
 
-box1_open()
+playFX_Spawn()
 {
-	box1 = 		getent( "box1", "targetname" );
-	trigger = 	getent( "box1_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box1 RotateVelocity( ( -120, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread pickaxe_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box1 RotateVelocity( ( 120, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
+	rotatespawn1 = getent("rotatespawn1","targetname");
+	playLoopedFX( level.sqaures, 1, (rotatespawn1.origin));
 }
 
-pickaxe_trigger()
+playFX2_Spawn()
 {
-	self endon("close_door");
+	rotatespawn2 = getent("rotatespawn2","targetname");
+	playLoopedFX( level.rainbow, 1, (rotatespawn2.origin));
+}
+
+playFX3_Finish()
+{
+	finishleft = getent("finishleft","targetname");
+	playLoopedFX( level.clap01, 1, (finishleft.origin), 0, (1,1,0),(0,1,0));
+}
+
+playFX4_Finish()
+{
+	finishright = getent("finishright","targetname");
+	playLoopedFX( level.clap02, 1, (finishright.origin), 0, (1,-1,0),(0,1,0));
+}
+
+playFX5_Finish()
+{
+	finishmiddle = getent("finishmiddle","targetname");
+	playLoopedFX( level.screw, 1, (finishmiddle.origin), 0, (1,0,0));
+}
+
+applause()
+{
+	applause_sound = getent("finishsound","targetname");
+	self.finished = 0;
 
 	while(1)
 	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3pickaxe ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("pickaxe_mp"))
+		applause_sound waittill("trigger",user);
+		if(self.finished == 0)
 		{
-			player GiveWeapon( "pickaxe_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "pickaxe_mp" );
+			user playlocalsound("clap");
+			self.finished = 1;
 		}
-		self notify("close_door");
-	}
-}
 
-box2_open()
-{
-	box2 = 		getent( "box2", "targetname" );
-	trigger = 	getent( "box2_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box2 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread sword_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box2 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-sword_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3sword ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("sword_mp"))
-		{
-			player GiveWeapon( "sword_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "sword_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box3_open()
-{
-	box3 = 		getent( "box3", "targetname" );
-	trigger = 	getent( "box3_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box3 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread sword_diamond_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box3 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-sword_diamond_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3diamond sword ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("sword_diamond_mp"))
-		{
-			player GiveWeapon( "sword_diamond_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "sword_diamond_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box4_open()
-{
-	box4 = 		getent( "box4", "targetname" );
-	trigger = 	getent( "box4_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box4 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread cinematic_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box4 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-cinematic_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3 well see for yourself ^7xoxo" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("cinematic_mp"))
-		{
-			player GiveWeapon( "cinematic_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "cinematic_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box_wait( time )
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		wait( time );
-		self notify("close_door");
+		wait 0.5;
 	}
 }

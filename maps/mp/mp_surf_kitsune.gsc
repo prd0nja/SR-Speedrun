@@ -34,232 +34,84 @@
 	                "NNNNNNNNNNL___NNNNNNNNNNNNNNNNNNNNF`           �4NNNNNNNNNNNNNNNN____.   _____NNNNNF"
 	                  �"NNNNNNNNNNNNNNNNNNNNNNNNNNNNF"                 "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNF`
 	                     �"NNNNNNNNNNNNNNNNNNNNNN""                      �"NNNNNNNNNNNNNNNNNNNNNNNNF"
-	                         �"""NNNNNNNNNN"""`                              �""NNNNNNNNNNNNNNF""
+	                         �"""NNNNNNNNNN"""`                              �""NNNNNNNNNNNNNNF""       lol@atrx
 
 
 						-++++++++++++++++++++++++++++++++++++++++++++-
 
 							MAPPER:			R4d0xZz
-							MAPNAME:		surf_rebel_resistance_reloaded
-							CONSOLE-NAME:	mp_surf_rebel
+							MAPNAME:		surf_kitsune
+							CONSOLE-NAME:	mp_surf_kitsune
 							GAMETYPES:		surf
 
 						-++++++++++++++++++++++++++++++++++++++++++++-
 
 */
 
-#include maps\mp\_utility;
-#include maps\mp\gametypes\_hud_util;
-#include common_scripts\utility;
-
 main()
 {
 	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+
 	// THREADS+ //
 
-	  thread box1_open();
-	  thread box2_open();
-	  thread box3_open();
-	  thread box4_open();
-
+	thread rainbowpipe();
+	thread makeitrain();
 
 	// PRECACHE+ //
 
-	  PreCacheItem( "pickaxe_mp" );
-	  PreCacheItem( "sword_mp" );
-	  PreCacheItem( "sword_diamond_mp" );
-	  PreCacheItem( "cinematic_mp" );
-
-
 	// MISC+ //
 
-	  setExpFog(6000, 7500, 0.9, 0.7, 0.7, 1);		// org : setExpFog(400, 401, 0.7, 0.7, 0.7, 1);
-
-	  level.fognearplane = 6000;
-	  level.fogexphalfplane = 7500;
-
+	ambientPlay("ambient_backlot_ext");
+	setdvar("r_specularcolorscale","3");
 
 }
 
-box1_open()
+rainbowpipe()
 {
-	box1 = 		getent( "box1", "targetname" );
-	trigger = 	getent( "box1_trigger", "targetname" );
+	pipe = getent("rainbow","targetname");
 
 	while(1)
 	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box1 RotateVelocity( ( -120, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread pickaxe_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box1 RotateVelocity( ( 120, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
+		pipe rotateYaw(360,10);
+		wait 9.9;
 	}
 }
 
-pickaxe_trigger()
+makeitrain()
 {
-	self endon("close_door");
+	fin1 = getent("finish1","targetname");
+	fin2 = getent("finish2","targetname");
+	fin3 = getent("finish3","targetname");
+	fin4 = getent("finish4","targetname");
+	fin5 = getent("finish5","targetname");
+	fin6 = getent("finish6","targetname");
+
+	fin1 hide();
+	fin2 hide();
+	fin3 hide();
+	fin4 hide();
+	fin5 hide();
+	fin6 hide();
 
 	while(1)
 	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3pickaxe ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("pickaxe_mp"))
-		{
-			player GiveWeapon( "pickaxe_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "pickaxe_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box2_open()
-{
-	box2 = 		getent( "box2", "targetname" );
-	trigger = 	getent( "box2_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box2 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread sword_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box2 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-sword_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3sword ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("sword_mp"))
-		{
-			player GiveWeapon( "sword_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "sword_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box3_open()
-{
-	box3 = 		getent( "box3", "targetname" );
-	trigger = 	getent( "box3_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box3 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread sword_diamond_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box3 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-sword_diamond_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3diamond sword ^7!!" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("sword_diamond_mp"))
-		{
-			player GiveWeapon( "sword_diamond_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "sword_diamond_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box4_open()
-{
-	box4 = 		getent( "box4", "targetname" );
-	trigger = 	getent( "box4_trigger", "targetname" );
-
-	while(1)
-	{
-		trigger sethintstring( "Press ^3&&1 ^7to open the box" );
-		trigger waittill("trigger");
-
-		box4 RotateVelocity( ( -85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 1;
-
-		trigger thread cinematic_trigger();
-		trigger thread box_wait( 10 );
-
-		trigger waittill("close_door");
-
-		trigger sethintstring( "" );
-
-		box4 RotateVelocity( ( 85, 0, 0 ), 1, 0.5, 0.5 );
-		wait 2;
-	}
-}
-
-cinematic_trigger()
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		self sethintstring( "Press ^3&&1 ^7to get yourself a ^3 well see for yourself ^7xoxo" );
-		self waittill( "trigger", player );
-		if(!player hasWeapon("cinematic_mp"))
-		{
-			player GiveWeapon( "cinematic_mp" );
-			wait 0.1;
-			player SwitchToWeapon( "cinematic_mp" );
-		}
-		self notify("close_door");
-	}
-}
-
-box_wait( time )
-{
-	self endon("close_door");
-
-	while(1)
-	{
-		wait( time );
-		self notify("close_door");
+		fin1 show();
+		wait 0.5;
+		fin1 hide();
+		fin2 show();
+		wait 0.5;
+		fin2 hide();
+		fin3 show();
+		wait 0.5;
+		fin3 hide();
+		fin4 show();
+		wait 0.5;
+		fin4 hide();
+		fin5 show();
+		wait 0.5;
+		fin5 hide();
+		fin6 show();
+		wait 0.5;
+		fin6 hide();
 	}
 }
