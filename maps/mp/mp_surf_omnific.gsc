@@ -24,6 +24,7 @@
 
 main()
 {
+	thread sr\api\_map::createSpawn((9551, 15823, 7964), 0);
 	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
 	// FX ++
 	level.spawn_geotrail_fx						= loadFx( "trails/fx_trail_pink" );
