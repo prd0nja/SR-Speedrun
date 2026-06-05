@@ -26,6 +26,7 @@ main()
 {
 	thread sr\api\_map::createSpawn((9551, 15823, 7964), 0);
 	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
+	sr\api\_speedrun::createNormalWays("Normal Way;");
 	// FX ++
 	level.spawn_geotrail_fx						= loadFx( "trails/fx_trail_pink" );
 	level.trail_gloaming_mm						= loadFx( "trails/fx_trail_pink" );

@@ -55,6 +55,7 @@
 main()
 {
 	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
+	sr\api\_speedrun::createNormalWays("Normal Way;");
 		// FX ++
 	level.map_creator							= loadFx( "map_creator" );
 	level.trail_gloaming_mm						= loadFx( "trail_gloaming_mm" );

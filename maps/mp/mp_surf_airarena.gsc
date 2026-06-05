@@ -53,6 +53,7 @@ main()
 {
 
 sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
+	sr\api\_speedrun::createNormalWays("Normal Way;");
 
 	level.sqaures  = loadFx( "surf/moving_sqaures" );
 	level.rainbow  = loadFx( "surf/rainbow_rotate" );

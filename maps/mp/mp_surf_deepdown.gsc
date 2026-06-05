@@ -55,6 +55,7 @@
 main()
 {
 	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
+	sr\api\_speedrun::createNormalWays("Normal Way;");
 	// FX ++
 	level._effect[ "fx_dotz_deepdown" ]			= loadfx( "fx_dotz_deepdown" );
 
