@@ -54,7 +54,7 @@
 
 main()
 {
-	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
 	// THREADS+ //
 
 	  thread box1_open();

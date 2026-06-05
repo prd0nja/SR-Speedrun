@@ -23,7 +23,7 @@
 
 main()
 {
-	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
 	// FX ++
 	level.trail_gloaming_mm						= loadFx( "trail_gloaming_mm" );
 

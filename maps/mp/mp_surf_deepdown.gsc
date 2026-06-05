@@ -54,7 +54,7 @@
 
 main()
 {
-	getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+	sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
 	// FX ++
 	level._effect[ "fx_dotz_deepdown" ]			= loadfx( "fx_dotz_deepdown" );
 

@@ -52,7 +52,7 @@
 main()
 {
 
-getEntArray("trigger_endmap", "targetname")[0].targetname = "endmap_trig";
+sr\api\_map::swapTargetname("trigger_endmap", "endmap_trig");
 
 	level.sqaures  = loadFx( "surf/moving_sqaures" );
 	level.rainbow  = loadFx( "surf/rainbow_rotate" );
