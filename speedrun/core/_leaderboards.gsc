@@ -89,7 +89,7 @@ getPlayerWorldRecordCount()
 	SQL_Free(request);
 
 	filter = "SELECT id, map, name, mode, way, player, time, tas, min(time) OVER (PARTITION BY map, mode, way, tas) AS minTime FROM leaderboards";
-	query = fmt("SELECT COUNT(*) FROM (%s) b WHERE time = minTime AND player = ? AND tas = 0 AND mode IN (%s, %s, %s, %s, %s)",
+	query = fmt("SELECT COUNT(*) FROM (%s) b WHERE time = minTime AND player = ? AND tas = 0 AND mode IN ('%s', '%s', '%s', '%s', '%s')",
         filter, "Q3", "Q3CPM", "Q3CPMW", "CS", "Portal");
 
 	request = SQL_Prepare(query);
