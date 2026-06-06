@@ -5,6 +5,7 @@ source .cod4env
 cd "$MOD"
 rm -v mod.ff
 cp -rv maps/mp/gametypes "$GAME/raw/maps/mp"
+cp -rv devmap/* "$GAME/raw"
 
 # SR
 cd "$SR/assets"

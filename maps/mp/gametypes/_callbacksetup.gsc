@@ -261,6 +261,6 @@ CodeCallback_ScriptCommand(cmd, arg)
 AbortLevel()
 {
 	println("Gametype is not supported");
-	setDvar("g_gametype", "deathrun");
+	setDvar("g_gametype", "speedrun");
 	exitLevel(false);
 }

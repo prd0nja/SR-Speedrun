@@ -26,6 +26,7 @@ main()
 precache()
 {
 	precacheMenu("main/main_mp");
+	precacheMenu("main/sr_about");
 	precacheMenu("main/sr_customize");
 	precacheMenu("main/sr_leaderboard");
 	precacheMenu("main/sr_votemap");
@@ -41,6 +42,8 @@ precache()
 	precacheMenu("misc/endofgame");
 	precacheMenu("misc/scoreboard");
 	precacheMenu("misc/muteplayer");
+
+	precacheMenu("about_page_1");
 }
 
 menu_Dog(arg)

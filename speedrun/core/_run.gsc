@@ -5,9 +5,11 @@ main()
 {
 	speedrun\core\_leaderboards::addMode("190", ::start_190);
 	speedrun\core\_leaderboards::addMode("210", ::start_210);
+	speedrun\core\_leaderboards::addMode("Q3", ::start_Q3);
+	speedrun\core\_leaderboards::addMode("Q3CPM", ::start_Q3);
+	speedrun\core\_leaderboards::addMode("Q3CPMW", ::start_Q3W);
+	speedrun\core\_leaderboards::addMode("CS", ::start_CS);
 	speedrun\core\_leaderboards::addMode("Portal", ::start_Portal);
-	speedrun\core\_leaderboards::addMode("Defrag", ::start_Defrag);
-	speedrun\core\_leaderboards::addMode("Bhop", ::start_Bhop);
 
     event("map", ::endmapTrigger);
 }
@@ -33,9 +35,11 @@ getLastMode()
 	{
 		case 1: return "190";
 		case 2: return "210";
-		case 3: return "Portal";
-		case 4: return "Defrag";
-		case 5: return "Bhop";
+		case 3: return "Q3";
+		case 4: return "Q3CPM";
+		case 5: return "Q3CPMW";
+		case 6: return "CS";
+		case 7: return "Portal";
 	}
 	return "190";
 }
@@ -46,9 +50,11 @@ getLastModeStat()
 	{
 		case "190": return 1;
 		case "210": return 2;
-		case "Portal": return 3;
-		case "Defrag": return 4;
-		case "Bhop": return 5;
+		case "Q3": return 3;
+		case "Q3CPM": return 4;
+		case "Q3CPMW": return 5;
+		case "CS": return 6;
+		case "Portal": return 7;
 	}
 	return 1;
 }
@@ -131,14 +137,13 @@ start_190()
 	self.jumpHeight = sr\api\_map::getJumpHeight(39);
 	self.speed = sr\api\_map::getSpeed(190);
 
-	if (sr\api\_speedrun::isSlide())
+	if (isSlide())
 	{
 		self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.0);
 		self.gravity = sr\api\_map::getGravity(1000);
 		self.jumpHeight = sr\api\_map::getJumpHeight(70);
 		self.speed = sr\api\_map::getSpeed(190 * level.map_slide_multiplier);
 	}
-
 	self.spawnMoveSpeedScale = self.moveSpeedScale;
 	self.spawnGravity = self.gravity;
 	self.spawnJumpHeight = self.jumpHeight;
@@ -157,13 +162,30 @@ start_210()
 	self.jumpHeight = sr\api\_map::getJumpHeight(39);
 	self.speed = sr\api\_map::getSpeed(210);
 
-	if (sr\api\_speedrun::isSlide())
+	if (isSlide())
 	{
 		self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.8);
 		self.gravity = sr\api\_map::getGravity(1000);
 		self.jumpHeight = sr\api\_map::getJumpHeight(70);
 		self.speed = sr\api\_map::getSpeed(190 * level.map_slide_multiplier);
 	}
+	self.spawnMoveSpeedScale = self.moveSpeedScale;
+	self.spawnGravity = self.gravity;
+	self.spawnJumpHeight = self.jumpHeight;
+	self.spawnSpeed = self.speed;
+
+	self setMoveSpeedScale(self.moveSpeedScale);
+	self setGravity(self.gravity);
+	self setJumpHeight(self.jumpHeight);
+	self setMoveSpeed(self.speed);
+}
+
+start_Q3()
+{
+	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.0);
+	self.gravity = sr\api\_map::getGravity(800);
+	self.jumpHeight = sr\api\_map::getJumpHeight(39);
+	self.speed = sr\api\_map::getSpeed(320);
 
 	self.spawnMoveSpeedScale = self.moveSpeedScale;
 	self.spawnGravity = self.gravity;
@@ -176,46 +198,12 @@ start_210()
 	self setMoveSpeed(self.speed);
 }
 
-start_Bhop()
+start_Q3W()
 {
-	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(0.9);
+	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.0);
 	self.gravity = sr\api\_map::getGravity(800);
 	self.jumpHeight = sr\api\_map::getJumpHeight(39);
 	self.speed = sr\api\_map::getSpeed(320);
-
-	if (sr\api\_speedrun::isSlide())
-	{
-		self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.8);
-		self.gravity = sr\api\_map::getGravity(1000);
-		self.jumpHeight = sr\api\_map::getJumpHeight(70);
-		self.speed = sr\api\_map::getSpeed(190 * level.map_slide_multiplier);
-	}
-
-	self.spawnMoveSpeedScale = self.moveSpeedScale;
-	self.spawnGravity = self.gravity;
-	self.spawnJumpHeight = self.jumpHeight;
-	self.spawnSpeed = self.speed;
-
-	self setMoveSpeedScale(self.moveSpeedScale);
-	self setGravity(self.gravity);
-	self setJumpHeight(self.jumpHeight);
-	self setMoveSpeed(self.speed);
-}
-
-start_Defrag()
-{
-	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(0.9);
-	self.gravity = sr\api\_map::getGravity(800);
-	self.jumpHeight = sr\api\_map::getJumpHeight(39);
-	self.speed = sr\api\_map::getSpeed(320);
-
-	if (sr\api\_speedrun::isSlide())
-	{
-		self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.8);
-		self.gravity = sr\api\_map::getGravity(1000);
-		self.jumpHeight = sr\api\_map::getJumpHeight(70);
-		self.speed = sr\api\_map::getSpeed(190 * level.map_slide_multiplier);
-	}
 
 	self.spawnMoveSpeedScale = self.moveSpeedScale;
 	self.spawnGravity = self.gravity;
@@ -227,7 +215,7 @@ start_Defrag()
 	self setJumpHeight(self.jumpHeight);
 	self setMoveSpeed(self.speed);
 
-	if (!level.defragStartWeapons.size)
+	if (!level.q3StartWeapons.size)
 	{
 		for (i = 0; i < level.weapons.size; i++)
 		{
@@ -237,31 +225,40 @@ start_Defrag()
 		}
 		return;
 	}
-
 	self takeAllWeapons();
-	for (i = 0; i < level.defragStartWeapons.size; i++)
+	for (i = 0; i < level.q3StartWeapons.size; i++)
 	{
-		weapon = level.defragWeapons[level.defragStartWeapons[i]];
+		weapon = level.q3Weapons[level.q3StartWeapons[i]];
 		self giveWeapon(weapon);
 		if (i == 0)
 			self setSpawnWeapon(weapon);
 	}
 }
 
-start_Portal()
+start_CS()
 {
-	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.12);
+	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.0);
 	self.gravity = sr\api\_map::getGravity(800);
 	self.jumpHeight = sr\api\_map::getJumpHeight(39);
-	self.speed = sr\api\_map::getSpeed(210);
+	self.speed = sr\api\_map::getSpeed(250);
 
-	if (sr\api\_speedrun::isSlide())
-	{
-		self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.8);
-		self.gravity = sr\api\_map::getGravity(1000);
-		self.jumpHeight = sr\api\_map::getJumpHeight(70);
-		self.speed = sr\api\_map::getSpeed(190 * level.map_slide_multiplier);
-	}
+	self.spawnMoveSpeedScale = self.moveSpeedScale;
+	self.spawnGravity = self.gravity;
+	self.spawnJumpHeight = self.jumpHeight;
+	self.spawnSpeed = self.speed;
+
+	self setMoveSpeedScale(self.moveSpeedScale);
+	self setGravity(self.gravity);
+	self setJumpHeight(self.jumpHeight);
+	self setMoveSpeed(self.speed);
+}
+
+start_Portal()
+{
+	self.moveSpeedScale = sr\api\_map::getMoveSpeedScale(1.0);
+	self.gravity = sr\api\_map::getGravity(800);
+	self.jumpHeight = sr\api\_map::getJumpHeight(39);
+	self.speed = sr\api\_map::getSpeed(250);
 
 	self.spawnMoveSpeedScale = self.moveSpeedScale;
 	self.spawnGravity = self.gravity;
@@ -273,9 +270,8 @@ start_Portal()
 	self setJumpHeight(self.jumpHeight);
 	self setMoveSpeed(self.speed);
 
-	self allowAds(true);
-
 	weapon = level.portalgun;
+	self allowAds(true);
 	self takeAllWeapons();
 	self giveWeapon(weapon);
 	self setSpawnWeapon(weapon);

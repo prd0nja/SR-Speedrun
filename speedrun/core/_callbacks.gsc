@@ -69,7 +69,7 @@ playerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vP
 		return;
 	if (isPlayer(eAttacker) && sMeansOfDeath == "MOD_MELEE" && isWallbang(eAttacker, self))
 		return;
-	if (sMeansOfDeath == "MOD_FALLING" && (self isDefrag() || self isBhop()))
+	if (sMeansOfDeath == "MOD_FALLING" && (self isQ3() || self isCS()))
 		return;
 
 	iDFlags |= level.iDFLAGS_NO_KNOCKBACK;
@@ -132,7 +132,7 @@ playerSpawn()
 		self giveMaxAmmo(self.pers["weapon"]);
 	}
 
-	if (sr\api\_speedrun::isCJ())
+	if (isCJ())
 	{
 		self setActionSlot(4, "weapon", "rpg_mp");
 		self giveWeapon("rpg_mp");
@@ -180,5 +180,9 @@ serverDvars()
 		"player_sprintTime", 4,
 		"ui_hud_hardcore", 1,
 		"ui_uav_client", 0
+	);
+	wait 0.05;
+	self setClientDvars(
+		"cef_url", "https://sr-speedrun.com/media"
 	);
 }

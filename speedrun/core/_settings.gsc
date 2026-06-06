@@ -16,11 +16,12 @@ main()
 	settings(7,  "hud_velocity", "Velocity Metter", 1607, 8, ::update_hudVelocity, ::toggle_hudVelocity);
 	settings(13, "hud_velocity_info", "Velocity Info", 1613, 0, ::update_hudVelocityInfo, ::toggle_hudVelocityInfo);
 	settings(15, "hud_velocity_ground", "Ground Time", 1614, 0, ::update_hudVelocityGround, ::toggle_hudVelocityGround);
-	settings(8,  "hud_compass", "Compass", 1608, 8, ::update_hudCompass, ::toggle_hudCompass);
+	settings(8,  "hud_compass", "Compass", 1608, 0, ::update_hudCompass, ::toggle_hudCompass);
 	settings(16, "hud_cgaz", "CGAZ HUD", 1616, false, ::update_hudCgaz, ::toggle_hudCgaz);
 	settings(10, "hud_2D", "Draw 2D", 1610, true, ::update_hud2D, ::toggle_hud2D);
-	settings(22, "hud_spectating", "Spectating HUD", 1624, false, ::update_hudSpectating, ::toggle_hudSpectating);
+	settings(22, "hud_spectating", "Spectating HUD", 1624, true, ::update_hudSpectating, ::toggle_hudSpectating);
 	settings(23, "hud_hitmarker", "Hitmarker", 1625, false, ::update_hudHitmarker, ::toggle_hudHitmarker);
+	settings(24, "hud_pmove", "PMove HUD", 1626, false, ::update_hudPmove, ::toggle_hudPmove);
 	settings(9,  "player_hide", "Hide Players", 1609, false, ::update_playerHide, ::toggle_playerHide);
 	settings(12, "player_knife", "Knife Only", 1612, false, ::update_playerKnife, ::toggle_playerKnife);
 	settings(19, "player_voice", "Voice chat", 1620, true, ::update_playerVoice, ::toggle_playerVoice);
@@ -94,6 +95,12 @@ update_hudSpectating(setting)
 update_hudHitmarker(setting)
 {
 	value = self.settings["hud_hitmarker"];
+	self updateHud(setting.index, value);
+}
+
+update_hudPmove(setting)
+{
+	value = self.settings["hud_pmove"];
 	self updateHud(setting.index, value);
 }
 
@@ -265,6 +272,11 @@ toggle_hudSpectating(setting)
 toggle_hudHitmarker(setting)
 {
 	self.settings["hud_hitmarker"] = !self.settings["hud_hitmarker"];
+}
+
+toggle_hudPmove(setting)
+{
+	self.settings["hud_pmove"] = !self.settings["hud_pmove"];
 }
 
 toggle_playerHide(setting)
