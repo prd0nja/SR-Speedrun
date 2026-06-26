@@ -3,15 +3,24 @@
 
 main()
 {
-	speedrun\core\_leaderboards::addMode("190", ::start_190);
-	speedrun\core\_leaderboards::addMode("210", ::start_210);
-	speedrun\core\_leaderboards::addMode("Q3", ::start_Q3);
-	speedrun\core\_leaderboards::addMode("Q3CPM", ::start_Q3);
-	speedrun\core\_leaderboards::addMode("Q3CPMW", ::start_Q3W);
-	speedrun\core\_leaderboards::addMode("CS", ::start_CS);
-	speedrun\core\_leaderboards::addMode("Portal", ::start_Portal);
+	level.run_modes = [];
+
+	addMode("190", ::start_190);
+	addMode("210", ::start_210);
+	addMode("Q3", ::start_Q3);
+	addMode("Q3CPM", ::start_Q3);
+	addMode("Q3CPMW", ::start_Q3W);
+	addMode("CS", ::start_CS);
+	addMode("Portal", ::start_Portal);
 
     event("map", ::endmapTrigger);
+}
+
+addMode(mode, callback)
+{
+	level.run_modes[mode] = spawnStruct();
+	level.run_modes[mode].id = mode;
+	level.run_modes[mode].callback = callback;
 }
 
 start()
@@ -24,7 +33,7 @@ start()
 	if (self getStat(1700) != self getModeStat())
 		self setStat(1700, self getModeStat());
 
-    self [[level.leaderboard_modes[self.sr_mode].callback]]();
+    self [[level.run_modes[self.sr_mode].callback]]();
 	self thread playerTimer();
 }
 
