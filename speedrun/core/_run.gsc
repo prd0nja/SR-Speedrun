@@ -18,19 +18,32 @@ start()
 {
 	self.finishedMap = false;
 
-	self.sr_mode = self getLastMode();
-	if (sr\core\_event::isEventStarted())
-		self.sr_mode = "210";
-	if (self sr\core\_minigames::isInAnyQueue())
-		self.sr_mode = "210";
+	self.sr_mode = self getMode();
 	self.sr_way = "normal_0";
+
+	if (self getStat(1700) != self getModeStat())
+		self setStat(1700, self getModeStat());
+
+	iPrintLnBold(self.sr_mode);
+	iPrintLnBold(self getStat(1700));
 
     self [[level.leaderboard_modes[self.sr_mode].callback]]();
 	self thread playerTimer();
 }
 
-getLastMode()
+getMode()
 {
+	if (isDefined(self.demo))
+		return self.sr_mode;
+	if (isDefined(self.sr_mode_force))
+		return self.sr_mode_force;
+	if (isSurf())
+		return "CS";
+	if (sr\core\_event::isEventStarted())
+		return "210";
+	if (self sr\core\_minigames::isInAnyQueue())
+		return "210";
+
 	switch (self getStat(1700))
 	{
 		case 1: return "190";
@@ -44,7 +57,7 @@ getLastMode()
 	return "190";
 }
 
-getLastModeStat()
+getModeStat()
 {
 	switch (self.sr_mode)
 	{

@@ -14,7 +14,7 @@ playerConnect()
 	self.teamKill = false;
 	self.hidden = false;
 
-	self.sr_mode = self speedrun\core\_run::getLastMode();
+	self.sr_mode = self speedrun\core\_run::getMode();
 	self.sr_way = "normal_0";
 	self.run = 0;
 

@@ -19,7 +19,6 @@ setup(id)
 	self.demo = level.demos[id];
 	self.sr_mode = self.demo["mode"];
 	self sr\core\_teams::setTeam("allies");
-	self setStat(1700, self speedrun\core\_run::getLastModeStat());
 	self eventSpawn(true);
 
 	if (isDefined(self.demoCamera))
