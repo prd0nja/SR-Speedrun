@@ -11,4 +11,5 @@ local.cfg
 serverstatus.xml
 sys_error.txt
 missingasset.csv
+whitelist.txt
 .env

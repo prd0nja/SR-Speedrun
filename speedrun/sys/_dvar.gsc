@@ -4,6 +4,7 @@ main()
 {
 	addDvar("mod", "mod_id", "speedrun");
 	addDvar("debug", "sr_debug", 0, 0, 1, "int");
+	addDvar("whitelist", "sr_whitelist", 0, 0, 1, "int");
 	addDvar("spawn_time", "sr_spawn_time", 0, 0, 30, "int");
 	addDvar("demos", "sr_demos", 1, 0, 1, "int");
 	addDvar("demos_timeout", "sr_demos_timeout", 120, 20, 1200, "int");
